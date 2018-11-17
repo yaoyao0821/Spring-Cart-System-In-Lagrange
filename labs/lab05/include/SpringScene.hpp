@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Sphere.hpp"
 //#include "Spring.hpp"
 #include "Lagrange.hpp"
 
 #include <atlas/tools/ModellingScene.hpp>
 #include <atlas/utils/FPSCounter.hpp>
+#include <atlas/tools/MayaCamera.hpp>
+
 
 namespace lab5
 {
@@ -16,14 +17,16 @@ namespace lab5
 
         void updateScene(double time) override;
         void renderScene() override;
-
+        //camera
+        void mousePressEvent(int button, int action, int modifiers,
+                             double xPos, double yPos) override;
+        void mouseMoveEvent(double xPos, double yPos) override;
     private:
         bool mPlay;
         atlas::utils::FPSCounter mAnimCounter;
-//        Planet mEarth;
-        Sphere mSun;
-//        Spring mSpring;
         Lagrange lagrange;
+        bool frontView;
+        
     };
 }
 

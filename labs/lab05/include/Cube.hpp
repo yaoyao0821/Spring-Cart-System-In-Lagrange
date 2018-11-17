@@ -27,13 +27,6 @@ namespace lab5
         atlas::gl::VertexArrayObject mVao;
         atlas::gl::Texture mTexture;
 
-        atlas::math::Point mPosition;
-        atlas::math::Vector mVelocity;
-
         GLsizei mIndexCount;
-        const float mG = 6.67384e-11f;
-        const float mCentralMass = 1.0e15f;
-        const float mOrbit = 10.0f;
-        float rdotdot,rdot,r,thetadotdot,thetadot,theta;
     };
 }

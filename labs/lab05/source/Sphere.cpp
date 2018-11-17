@@ -10,12 +10,9 @@
 #include "glm/ext.hpp"
 namespace lab5
 {
-    Sphere::Sphere(std::string const& textureFile) :
+    Sphere::Sphere() :
         mVertexBuffer(GL_ARRAY_BUFFER),
-        mIndexBuffer(GL_ELEMENT_ARRAY_BUFFER),
-        mTexture(GL_TEXTURE_2D),
-        r(mOrbit), rdot(0.f), rdotdot(0.f),
-        theta(0.f), thetadot(0.f), thetadotdot(0.f)
+        mIndexBuffer(GL_ELEMENT_ARRAY_BUFFER)
     {
         using atlas::utils::Mesh;
         namespace gl = atlas::gl;
@@ -66,21 +63,6 @@ namespace lab5
         mVertexBuffer.unBindBuffer();
         mVao.unBindVertexArray();
 
-//        int width, height, nrChannels;
-//        std::string imagePath = std::string(DataDirectory) + textureFile;
-//        unsigned char* imageData = stbi_load(imagePath.c_str(), &width, &height,
-//            &nrChannels, 0);
-//
-//        mTexture.bindTexture();
-//        mTexture.texImage2D(0, GL_RGB, width, height, 0,
-//            GL_RGB, GL_UNSIGNED_BYTE, imageData);
-//        mTexture.texParameteri(GL_TEXTURE_WRAP_S, GL_REPEAT);
-//        mTexture.texParameteri(GL_TEXTURE_WRAP_T, GL_REPEAT);
-//        mTexture.texParameteri(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-//        mTexture.texParameteri(GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-//        glGenerateMipmap(GL_TEXTURE_2D);
-//        stbi_image_free(imageData);
-
         std::vector<gl::ShaderUnit> shaders
         {
             {std::string(ShaderDirectory) + "Ball.vs.glsl", GL_VERTEX_SHADER},
@@ -102,16 +84,7 @@ namespace lab5
         mUniforms.insert(UniformKey("materialColour", var));
 
         mShaders[0].disableShaders();
-//        mModel = glm::scale(math::Matrix4(1.0f), math::Vector(1.0f));
-//        mModel = glm::scale(math::Matrix4(1.0f), glm::vec3(0.5f,0.5f,0.5f));
 
-        mVelocity = atlas::math::Vector(glm::sqrt(mG * mCentralMass / mOrbit));
-
-//        std::cout<<glm::to_string(mVelocity)<<std::endl;
-//        float test = glm::sqrt(mG * mCentralMass) / mOrbit;
-//        printf("!! %f",test);
-//       m v*v/r = GMm/r*r
-//        v*v = GM/r*
 
         
     }
@@ -121,65 +94,14 @@ namespace lab5
         using atlas::math::Matrix4;
         using atlas::math::cartesianToPolar;
 //        mModel = glm::rotate(mModel, (glm::mediump_float)90, glm::vec3(1, 0, 0));
-
-        mPosition.xz = cartesianToPolar(pos.xz);
-//
         mModel = glm::translate(Matrix4(1.0f), pos);
         mModel = glm::scale(mModel, glm::vec3(0.2f,.2f,.2f));
-//
-        r = mPosition.x;
-//        cartesianToPolar returns a radian
-        theta = mPosition.z * 180 / 3.141592654;
-        thetadot = mVelocity.x / r;
-        printf("\n HI %f, %f %f \n",mPosition.x,mPosition.y,mPosition.z);
-        printf("\n TEST %f, %f %f \n",r,theta,thetadot);
 
     }
 
     void Sphere::updateGeometry(atlas::core::Time<> const& t)
     
-    {
-        using atlas::math::Matrix4;
-        using atlas::math::Vector;
-        using atlas::math::polarToCartesian;
-        using atlas::math::Point;
-
-//        if (glm::abs(mPosition.x) < 6.0f)
-//        {
-//            return;
-//        }
-//
-//        if (glm::abs(mPosition.x) > 50.0f)
-//        {
-//            mVelocity.x = -1.0f * mVelocity.x;
-//        }
-//
-//
-//        // Todo by students
-//        
-//        
-//        //lagrangian mechanics
-//        rdotdot = ( r * thetadot * thetadot - (mG * mCentralMass) / (r * r) );
-//        rdot = rdot + rdotdot * t.deltaTime;
-//        r = r + rdot * t.deltaTime;
-//
-//        thetadotdot = (-2.f * rdot * thetadot / r);
-//        thetadot = thetadot + thetadotdot * t.deltaTime;
-//        theta = theta + thetadot * t.deltaTime;
-//
-//        auto posMat = glm::translate(atlas::math::Matrix4(1.0f), glm::vec3(r*cosf(glm::radians(theta)), 0.f, r*sinf(glm::radians(theta))));
-//        printf("\n %f, %f  \n",r*sinf(theta),r*cosf(theta));
-//
-////        auto position =polarToCartesian({r,theta});
-//        mModel = posMat;
-//        printf("====POSITION %f, %f  \n",r,theta);
-//        printf("==== %f,%f,%f, %f, %f,%f,  \n",r,rdot,rdotdot,theta,thetadot,thetadotdot);
-//
-////        moon->transformGeometry(posMat);
-//        
-
-        
-    }
+    {}
     
     void Sphere::renderGeometry(atlas::math::Matrix4 const& projection,
         atlas::math::Matrix4 const& view)
@@ -204,12 +126,9 @@ namespace lab5
         glUniformMatrix4fv(mUniforms["projection"], 1, GL_FALSE,
             &projection[0][0]);
         glUniformMatrix4fv(mUniforms["view"], 1, GL_FALSE, &view[0][0]);
-
         
         const math::Vector sphereColor{ 1.f, 1.f, 0.f };
         glUniform3fv(mUniforms["materialColour"], 1, &sphereColor[0]);
-        
-        
         
         glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, 0);
 
@@ -221,6 +140,5 @@ namespace lab5
 
     void Sphere::resetGeometry()
     {
-        mVelocity = atlas::math::Vector(glm::sqrt(mG * mCentralMass) / mOrbit);
     }
 }

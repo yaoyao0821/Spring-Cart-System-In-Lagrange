@@ -21,24 +21,12 @@ namespace lab5
     {
         public:
             Lagrange();
-            ~Lagrange();
-            void updateGeometry(atlas::core::Time<> const& t) override;
+            void updateGeometry(atlas::core::Time<> const& t,bool mPlay);
             void renderGeometry(atlas::math::Matrix4 const& projection,
                             atlas::math::Matrix4 const& view) override;
 
             void resetGeometry() override;
 
-//                void moveFixed(atlas::math::Vector);
-            Sphere mEarth;
-            Sphere mSun;
-            Spring mSpring;
-            Cube mCube;
-//
-//            float theta,thetadot,thetadotdot;
-//            float x,xdot,xdotdot;
-//            float s,sdot,sdotdot;
-
-        
 //          for spring
             float k,l;
             float s,sdot,sdotdot;
@@ -51,35 +39,10 @@ namespace lab5
 //          for sphere
             float m;
         
-        float initX = 0,initY = 20;
+            atlas::math::Vector startPoint,endPoint;
         
-        
-        private:
-//
-//
-//            float mLength;
-//                float mDampen;
-//                float mK;
-//            atlas::math::Point mPosition;
-//            float theta,thetadot,thetadotdot;
-//            float x,xdot,xdotdot;
-//        
-//
-                bool mPaused;
-        //            atlas::math::Point mPoints;
-        //            atlas::math::Vector mVelocity;
-        //            atlas::math::Vector mForce;
-        //                std::vector<atlas::math::Point> mPoints;
-//        atlas::gl::Buffer mVertexBuffer;
-//        atlas::gl::Buffer mIndexBuffer;
-//        atlas::gl::VertexArrayObject mVao;
-//        atlas::gl::Texture mTexture;
-//        std::vector<atlas::math::Point> mControlPoints;
-//        
-//        std::array<atlas::math::Vector, 2> mPoints;
-//        std::array<atlas::math::Vector, 2> mVelocity;
-//        std::array<atlas::math::Vector, 2> mForce;
-//        std::array<float, 2> mMass;
-
+            Sphere mSphere;
+            Spring mSpring;
+            Cube mCube;
     };
 }

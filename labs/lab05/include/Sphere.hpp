@@ -10,7 +10,7 @@ namespace lab5
     class Sphere : public atlas::utils::Geometry
     {
     public:
-        Sphere(std::string const& textureFile);
+        Sphere();
 
         void setPosition(atlas::math::Point const& pos);
 
@@ -26,14 +26,14 @@ namespace lab5
         atlas::gl::Buffer mIndexBuffer;
         atlas::gl::VertexArrayObject mVao;
         atlas::gl::Texture mTexture;
-
-        atlas::math::Point mPosition;
-        atlas::math::Vector mVelocity;
+//
+//        atlas::math::Point mPosition;
+//        atlas::math::Vector mVelocity;
 
         GLsizei mIndexCount;
-        const float mG = 6.67384e-11f;
-        const float mCentralMass = 1.0e15f;
-        const float mOrbit = 10.0f;
-        float rdotdot,rdot,r,thetadotdot,thetadot,theta;
+//        const float mG = 6.67384e-11f;
+//        const float mCentralMass = 1.0e15f;
+//        const float mOrbit = 10.0f;
+//        float rdotdot,rdot,r,thetadotdot,thetadot,theta;
     };
 }
