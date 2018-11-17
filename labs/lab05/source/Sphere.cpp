@@ -4,10 +4,7 @@
 
 #include <atlas/utils/Mesh.hpp>
 #include <atlas/core/STB.hpp>
-#include <atlas/math/Coordinates.hpp>
-#include <glm/gtx/string_cast.hpp>
-#include <iostream>
-#include "glm/ext.hpp"
+
 namespace lab5
 {
     Sphere::Sphere() :
@@ -92,7 +89,7 @@ namespace lab5
     void Sphere::setPosition(atlas::math::Point const& pos)
     {
         using atlas::math::Matrix4;
-        using atlas::math::cartesianToPolar;
+//        using atlas::math::cartesianToPolar;
 //        mModel = glm::rotate(mModel, (glm::mediump_float)90, glm::vec3(1, 0, 0));
         mModel = glm::translate(Matrix4(1.0f), pos);
         mModel = glm::scale(mModel, glm::vec3(0.2f,.2f,.2f));
@@ -127,7 +124,7 @@ namespace lab5
             &projection[0][0]);
         glUniformMatrix4fv(mUniforms["view"], 1, GL_FALSE, &view[0][0]);
         
-        const math::Vector sphereColor{ 1.f, 1.f, 0.f };
+        const math::Vector sphereColor{ 1.f, .9f, .1f };
         glUniform3fv(mUniforms["materialColour"], 1, &sphereColor[0]);
         
         glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, 0);

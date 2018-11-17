@@ -40,9 +40,11 @@ namespace lab5
             float m;
         
             atlas::math::Vector startPoint,endPoint;
-        
-            Sphere mSphere;
+//            atlas::math::Vector color;
             Spring mSpring;
+            Spring mLine;
+            Sphere mSphere;
+
             Cube mCube;
     };
 }

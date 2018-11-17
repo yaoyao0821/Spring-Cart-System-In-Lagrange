@@ -2,31 +2,24 @@
 #include "Paths.hpp"
 #include "LayoutLocations.glsl"
 
-#include <atlas/core/Float.hpp>
-
 #include <atlas/utils/Mesh.hpp>
 #include <atlas/core/STB.hpp>
 #include <atlas/math/Coordinates.hpp>
-// Debug
-#include <atlas/core/Log.hpp>
-#include <string>
-#include <glm/gtx/string_cast.hpp>
-#include <iostream>
-
 
 // Linear Spring Implementation
 namespace lab5
 {
-    Spring::Spring(atlas::math::Point const& start,atlas::math::Point const& end) :
+    Spring::Spring(atlas::math::Point const& start,atlas::math::Point const& end, atlas::math::Vector lineColour) :
         mVertexBuffer(GL_ARRAY_BUFFER),
-        mIndexBuffer(GL_ELEMENT_ARRAY_BUFFER)
+        mIndexBuffer(GL_ELEMENT_ARRAY_BUFFER),
+        colour(lineColour)
 //        mPaused(false)
     {
         namespace gl = atlas::gl;
         using atlas::math::Point;
         using atlas::math::Vector;
 
-
+        setPoints(start,end);
         mVao.bindVertexArray();
         mVertexBuffer.bindBuffer();
         mVertexBuffer.bufferData(gl::size<Vector>(mPoints.size()), mPoints.data(), GL_DYNAMIC_DRAW);
@@ -103,48 +96,17 @@ namespace lab5
         glUniformMatrix4fv(mUniforms["view"], 1, GL_FALSE, &view[0][0]);
         glUniformMatrix4fv(mUniforms["model"], 1, GL_FALSE, &mModel[0][0]);
         //draw
-        glUniform3f(mUniforms["colour"], 0, 1, 0);
-        //        glDrawArrays(GL_LINES, 0, mResolution);
+        glUniform3f(mUniforms["colour"], colour.x, colour.y, colour.z);
         glPointSize(10.0f);
-//        mVertexBuffer.bufferData(gl::size<Vector>(mPoints.size()), mPoints.data(), GL_DYNAMIC_DRAW);
 
         glDrawArrays(GL_POINTS, 0, GLsizei(mPoints.size()));
-        glPointSize(1.0f);
+        glPointSize(3.0f);
         glDrawArrays(GL_LINE_STRIP, 0, GLsizei(mPoints.size() ));
         
         
         mVao.unBindVertexArray();
         mShaders[0].disableShaders();
 
-
-//            USING_ATLAS_MATH_NS;
-//            mShaders[0]->enableShaders();
-//            glBindVertexArray(mVao);
-//            Matrix4 mvp = proj * view * mModel;
-//            glUniformMatrix4fv(mUniforms["MVP"], 1, GL_FALSE, &mvp[0][0]);
-//            GLfloat color[] = {0.1, 0.4, 0.7};
-//            glUniform3fv(mUniforms["color"], 1, color);
-//            glDrawArrays(GL_LINES, 0, 2);
-//            glBindVertexArray(0);
-//            mShaders[0]->disableShaders();
-//        mShaders[0].enableShaders();
-//        glBindVertexArray(mVao);
-//        glDrawArrays(GL_LINES, 0, 2);
-//
-//        glUniformMatrix4fv(mUniforms["model"], 1, GL_FALSE, &mModel[0][0]);
-//        glUniformMatrix4fv(mUniforms["projection"], 1, GL_FALSE,
-//                           &projection[0][0]);
-//        glUniformMatrix4fv(mUniforms["view"], 1, GL_FALSE, &view[0][0]);
-//        
-//        GLfloat color[] = {0.1, 0.4, 0.7};
-//        glUniform3fv(mUniforms["color"], 1, color);
-//        glDrawArrays(GL_LINES, 0, 2);
-//
-//        
-//        
-//        glBindVertexArray(0);
-//
-//        mShaders[0].disableShaders();
     }
     void Spring::resetGeometry()
     {

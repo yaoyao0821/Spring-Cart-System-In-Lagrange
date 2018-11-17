@@ -6,15 +6,12 @@
 
 #include <atlas/utils/Mesh.hpp>
 #include <atlas/core/STB.hpp>
-#include <atlas/math/Coordinates.hpp>
 // Debug
-#include <atlas/core/Log.hpp>
 #include <string>
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
 
 #define g 9.8
-
 
 // Linear Spring Implementation
 namespace lab5
@@ -25,24 +22,20 @@ namespace lab5
         x(0.f), xdot(0.f), xdotdot(0.f),
         k(50.f),l(8.f),M(20.0f),m(5.0f),
         mSpring(atlas::math::Vector(0, 10.0, 0),
-                atlas::math::Vector(x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f)),
+                atlas::math::Vector(x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f),
+                atlas::math::Vector(0,1,0)),
+        mLine(atlas::math::Vector(-15, 10.0, 0),atlas::math::Vector(15, 10.0, 0),atlas::math::Vector(0,1,1)),
         mSphere(),
         mCube()
     {
 
-        startPoint = {x,10.0f,0.0f};
-        endPoint = {x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f};
-        mSpring.setPoints(startPoint, endPoint);
-        
-        printf("%f %f",x + s * sinf(theta),10.0f - s * cosf(theta));
-        
+//        startPoint = {x,10.0f,0.0f};
+//        endPoint = {x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f};
+//        mSpring.setPoints(startPoint, endPoint);
         
         mCube.setPosition(startPoint);
         mSphere.setPosition(endPoint);
-        
 
-//        mPosition.xy = atlas::math::cartesianToPolar((mPoints[1]-mPoints[0]).xy);
-//        theta = 3.1415926/2;
     }
 
 
@@ -62,7 +55,6 @@ namespace lab5
             if ( x > 10.0f or  x < -10.0f)
             {
                 xdot = 0.0f;
-                //xdotdot = -xdotdot; not sure yet
                 printf("testX ");
             }
             thetadotdot = (-2.f * sdot * thetadot -  g * sinf(theta) - xdotdot * cosf(theta))
@@ -86,14 +78,13 @@ namespace lab5
                    x,xdot,xdotdot,theta,thetadot,thetadotdot,s,sdot,sdotdot);
         }
         //else still need to update position when pause
-//        Vector startPoint = {x,10.0f,0.0f};
-//        Vector endPoint = {x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f};
         startPoint = {x,10.0f,0.0f};
         endPoint = {x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f};
 
         mSpring.setPoints(startPoint, endPoint);
         mCube.setPosition(startPoint);
         mSphere.setPosition(endPoint);
+        
         printf("\n=POSITION==\n");
         std::cout<<glm::to_string(startPoint)<<std::endl;
         std::cout<<glm::to_string(endPoint)<<std::endl;
@@ -108,7 +99,7 @@ namespace lab5
         mSpring.renderGeometry(projection, view);
         mSphere.renderGeometry(projection, view);
         mCube.renderGeometry(projection, view);
-        printf("render l me\n");
+        mLine.renderGeometry(projection, view);
     }
 
     void Lagrange::resetGeometry()
@@ -122,28 +113,6 @@ namespace lab5
         l = 8.f;
         M = 20.0f;
         m = 5.0f;
-//        startPoint = {x,10.0f,0.0f};
-//        endPoint = {x + s * sinf(theta), 10.0f - s * cosf(theta), 0.0f};
-//        mSpring.setPoints(startPoint, endPoint);
-//        mCube.setPosition(startPoint);
-//        mSphere.setPosition(endPoint);
-
-//        mSpring.updateGeometry(t);
-
-//            USING_ATLAS_MATH_NS;
-//            mPoints = {Vector(0, 10, 0), Vector(0, -1, 0)};
-//            mVelocity = {Vector(0.f), Vector(0.f)};
-//            mForce = {Vector(0.f), Vector(0.f)};
-//            mLength = 1.f;
-//
-//            // Upload reset vertex data
-//            glBindVertexArray(mVao);
-//            glBindBuffer(GL_ARRAY_BUFFER, mVbo);
-//            glBufferSubData(GL_ARRAY_BUFFER,
-//                            0, sizeof(Vector) * 2,
-//                            &mPoints[0][0]);
-//            glBindVertexArray(0);
-//            glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
 
 

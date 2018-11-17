@@ -17,7 +17,7 @@ namespace lab5
     class Spring : public atlas::utils::Geometry
     {
         public:
-            Spring(atlas::math::Point const& start,atlas::math::Point const& end);
+            Spring(atlas::math::Point const& start,atlas::math::Point const& end,atlas::math::Vector colour);
             Spring();
 
 
@@ -34,6 +34,7 @@ namespace lab5
             atlas::gl::Buffer mIndexBuffer;
             atlas::gl::VertexArrayObject mVao;
             std::array<atlas::math::Vector, 2> mPoints;
+            atlas::math::Vector colour;
 
 
     };

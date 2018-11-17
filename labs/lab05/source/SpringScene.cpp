@@ -160,6 +160,15 @@ namespace lab5
         ImGui::InputFloat("xdotdot", &lagrange.xdotdot, 0.1f, 5.0f, 1);
         ImGui::End();
         
+        ImGui::SetNextWindowSize(ImVec2(300, 150), ImGuiSetCond_FirstUseEver);
+        ImGui::Begin("Other Settings");
+        ImGui::InputFloat("Mass(cube)", &lagrange.M, 0.1f, 5.0f, 1);
+        ImGui::InputFloat("mass(sphere)", &lagrange.m, 0.1f, 5.0f, 1);
+        ImGui::InputFloat("k(spring)", &lagrange.k, 0.1f, 5.0f, 1);
+        ImGui::InputFloat("l(spring)", &lagrange.l, 0.1f, 5.0f, 1);
+
+        ImGui::End();
+        
         ImGui::Render();
     }
     

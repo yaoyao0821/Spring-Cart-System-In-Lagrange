@@ -4,10 +4,9 @@
 
 #include <atlas/utils/Mesh.hpp>
 #include <atlas/core/STB.hpp>
-#include <atlas/math/Coordinates.hpp>
-#include <glm/gtx/string_cast.hpp>
-#include <iostream>
-#include "glm/ext.hpp"
+//#include <glm/gtx/string_cast.hpp>
+//#include <iostream>
+//#include "glm/ext.hpp"
 namespace lab5
 {
     Cube::Cube() :
@@ -94,8 +93,7 @@ namespace lab5
     void Cube::setPosition(atlas::math::Point const& pos)
     {
         using atlas::math::Matrix4;
-        using atlas::math::cartesianToPolar;
-//        mModel = glm::rotate(mModel, (glm::mediump_float)90, glm::vec3(1, 0, 0));
+//        using atlas::math::cartesianToPolar;
         mModel = glm::translate(Matrix4(1.0f), pos);
 //        mModel = glm::scale(mModel, glm::vec3(.4f,.4f,.4f));
     }
@@ -105,7 +103,7 @@ namespace lab5
     {
         using atlas::math::Matrix4;
         using atlas::math::Vector;
-        using atlas::math::polarToCartesian;
+//        using atlas::math::polarToCartesian;
         using atlas::math::Point;
 
 //        if (glm::abs(mPosition.x) < 6.0f)
