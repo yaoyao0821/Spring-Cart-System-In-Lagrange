@@ -101,44 +101,6 @@ namespace lab5
     void Cube::updateGeometry(atlas::core::Time<> const& t)
     
     {
-        using atlas::math::Matrix4;
-        using atlas::math::Vector;
-//        using atlas::math::polarToCartesian;
-        using atlas::math::Point;
-
-//        if (glm::abs(mPosition.x) < 6.0f)
-//        {
-//            return;
-//        }
-//
-//        if (glm::abs(mPosition.x) > 50.0f)
-//        {
-//            mVelocity.x = -1.0f * mVelocity.x;
-//        }
-//
-//
-//        // Todo by students
-//        
-//        
-//        //lagrangian mechanics
-//        rdotdot = ( r * thetadot * thetadot - (mG * mCentralMass) / (r * r) );
-//        rdot = rdot + rdotdot * t.deltaTime;
-//        r = r + rdot * t.deltaTime;
-//
-//        thetadotdot = (-2.f * rdot * thetadot / r);
-//        thetadot = thetadot + thetadotdot * t.deltaTime;
-//        theta = theta + thetadot * t.deltaTime;
-//
-//        auto posMat = glm::translate(atlas::math::Matrix4(1.0f), glm::vec3(r*cosf(glm::radians(theta)), 0.f, r*sinf(glm::radians(theta))));
-//        printf("\n %f, %f  \n",r*sinf(theta),r*cosf(theta));
-//
-////        auto position =polarToCartesian({r,theta});
-//        mModel = posMat;
-//        printf("====POSITION %f, %f  \n",r,theta);
-//        printf("==== %f,%f,%f, %f, %f,%f,  \n",r,rdot,rdotdot,theta,thetadot,thetadotdot);
-//
-////        moon->transformGeometry(posMat);
-//        
 
         
     }
@@ -156,7 +118,6 @@ namespace lab5
 
         mShaders[0].enableShaders();
 
-        mTexture.bindTexture();
         mVao.bindVertexArray();
         mIndexBuffer.bindBuffer();
 
@@ -173,7 +134,6 @@ namespace lab5
 
         mIndexBuffer.unBindBuffer();
         mVao.unBindVertexArray();
-        mTexture.unBindTexture();
         mShaders[0].disableShaders();
     }
 

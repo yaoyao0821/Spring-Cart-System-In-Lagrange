@@ -6,8 +6,6 @@
 #include <atlas/gl/Texture.hpp>
 
 #include <glm/vec2.hpp>
-
-
 #include <array>
 #include <vector>
 #include <cmath>

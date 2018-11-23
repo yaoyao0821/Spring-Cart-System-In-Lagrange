@@ -89,10 +89,8 @@ namespace lab5
     void Sphere::setPosition(atlas::math::Point const& pos)
     {
         using atlas::math::Matrix4;
-//        using atlas::math::cartesianToPolar;
-//        mModel = glm::rotate(mModel, (glm::mediump_float)90, glm::vec3(1, 0, 0));
         mModel = glm::translate(Matrix4(1.0f), pos);
-        mModel = glm::scale(mModel, glm::vec3(0.2f,.2f,.2f));
+        mModel = glm::scale(mModel, glm::vec3(.2f,.2f,.2f));
 
     }
 
@@ -113,7 +111,7 @@ namespace lab5
 
         mShaders[0].enableShaders();
 
-        mTexture.bindTexture();
+//        mTexture.bindTexture();
         mVao.bindVertexArray();
         mIndexBuffer.bindBuffer();
 
@@ -131,7 +129,7 @@ namespace lab5
 
         mIndexBuffer.unBindBuffer();
         mVao.unBindVertexArray();
-        mTexture.unBindTexture();
+//        mTexture.unBindTexture();
         mShaders[0].disableShaders();
     }
 

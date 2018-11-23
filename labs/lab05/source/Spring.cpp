@@ -87,8 +87,6 @@ namespace lab5
         mVertexBuffer.vertexAttribPointer(VERTICES_LAYOUT_LOCATION, 3, GL_FLOAT,
                                           GL_FALSE, 0, gl::bufferOffset<float>(0));
         mVertexBuffer.unBindBuffer();
-
-        printf("dmmmmmm\n\n");
         
         
         glUniformMatrix4fv(mUniforms["projection"], 1, GL_FALSE,
@@ -97,10 +95,10 @@ namespace lab5
         glUniformMatrix4fv(mUniforms["model"], 1, GL_FALSE, &mModel[0][0]);
         //draw
         glUniform3f(mUniforms["colour"], colour.x, colour.y, colour.z);
-        glPointSize(10.0f);
+        glPointSize(12.0f);
 
         glDrawArrays(GL_POINTS, 0, GLsizei(mPoints.size()));
-        glPointSize(3.0f);
+        glPointSize(1.0f);
         glDrawArrays(GL_LINE_STRIP, 0, GLsizei(mPoints.size() ));
         
         

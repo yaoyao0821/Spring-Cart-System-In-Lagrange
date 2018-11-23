@@ -22,9 +22,9 @@ namespace lab5
                              double xPos, double yPos) override;
         void mouseMoveEvent(double xPos, double yPos) override;
     private:
-        bool mPlay;
         atlas::utils::FPSCounter mAnimCounter;
         Lagrange lagrange;
+        bool mPlay;
         bool frontView;
         
     };

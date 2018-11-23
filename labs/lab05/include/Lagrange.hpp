@@ -6,14 +6,7 @@
 #include <atlas/utils/Geometry.hpp>
 #include <atlas/gl/Buffer.hpp>
 #include <atlas/gl/VertexArrayObject.hpp>
-#include <atlas/gl/Texture.hpp>
 
-#include <glm/vec2.hpp>
-
-
-#include <array>
-#include <vector>
-#include <cmath>
 
 namespace lab5
 {
@@ -21,7 +14,7 @@ namespace lab5
     {
         public:
             Lagrange();
-            void updateGeometry(atlas::core::Time<> const& t,bool mPlay);
+            void updateGeometry(atlas::core::Time<> const& t,bool &mPlay);
             void renderGeometry(atlas::math::Matrix4 const& projection,
                             atlas::math::Matrix4 const& view) override;
 
@@ -40,11 +33,9 @@ namespace lab5
             float m;
         
             atlas::math::Vector startPoint,endPoint;
-//            atlas::math::Vector color;
             Spring mSpring;
             Spring mLine;
             Sphere mSphere;
-
             Cube mCube;
     };
 }

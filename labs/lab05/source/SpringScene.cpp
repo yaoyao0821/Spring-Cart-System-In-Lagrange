@@ -88,10 +88,6 @@ namespace lab5
         // Global HUD
         ImGui::SetNextWindowSize(ImVec2(350, 140), ImGuiSetCond_FirstUseEver);
         ImGui::Begin("Global HUD");
-//        if (ImGui::Button("Reset Camera"))
-//        {
-//            mCamera.resetCamera();
-//        }
 
         if (mPlay)
         {
@@ -162,10 +158,10 @@ namespace lab5
         
         ImGui::SetNextWindowSize(ImVec2(300, 150), ImGuiSetCond_FirstUseEver);
         ImGui::Begin("Other Settings");
-        ImGui::InputFloat("Mass(cube)", &lagrange.M, 0.1f, 5.0f, 1);
-        ImGui::InputFloat("mass(sphere)", &lagrange.m, 0.1f, 5.0f, 1);
-        ImGui::InputFloat("k(spring)", &lagrange.k, 0.1f, 5.0f, 1);
-        ImGui::InputFloat("l(spring)", &lagrange.l, 0.1f, 5.0f, 1);
+        ImGui::InputFloat("Mass(cube)", &lagrange.M, 1.0f, 5.0f, 1);
+        ImGui::InputFloat("mass(sphere)", &lagrange.m, 1.0f, 5.0f, 1);
+        ImGui::InputFloat("k(spring)", &lagrange.k, 1.0f, 5.0f, 1);
+        ImGui::InputFloat("l(spring)", &lagrange.l, 1.0f, 10.0f, 1);
 
         ImGui::End();
         

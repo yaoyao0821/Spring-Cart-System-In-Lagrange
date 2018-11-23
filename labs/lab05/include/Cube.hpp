@@ -3,7 +3,6 @@
 #include <atlas/utils/Geometry.hpp>
 #include <atlas/gl/Buffer.hpp>
 #include <atlas/gl/VertexArrayObject.hpp>
-#include <atlas/gl/Texture.hpp>
 
 namespace lab5
 {
@@ -25,8 +24,6 @@ namespace lab5
         atlas::gl::Buffer mVertexBuffer;
         atlas::gl::Buffer mIndexBuffer;
         atlas::gl::VertexArrayObject mVao;
-        atlas::gl::Texture mTexture;
-
         GLsizei mIndexCount;
     };
 }
